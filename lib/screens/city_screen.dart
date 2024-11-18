@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:clima/utilities/constants.dart';
-
+import 'package:get/get.dart';
 class CityScreen extends StatefulWidget {
   @override
   _CityScreenState createState() => _CityScreenState();
 }
 
 class _CityScreenState extends State<CityScreen> {
+  String? cityName;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,8 +24,10 @@ class _CityScreenState extends State<CityScreen> {
             children: <Widget>[
               Align(
                 alignment: Alignment.topLeft,
-                child: FlatButton(
-                  onPressed: () {},
+                child: TextButton(
+                  onPressed: () {
+                    Get.back();
+                  },
                   child: Icon(
                     Icons.arrow_back_ios,
                     size: 50.0,
@@ -32,11 +35,19 @@ class _CityScreenState extends State<CityScreen> {
                 ),
               ),
               Container(
-                padding: EdgeInsets.all(20.0),
-                child: null,
+                margin: EdgeInsets.all(20.0),
+                child: TextField(
+                  decoration: kTextFieldDecoration,
+                  onChanged: (value) {
+                    cityName = value;
+                  },
+                ),
               ),
-              FlatButton(
-                onPressed: () {},
+              TextButton(
+                onPressed: () {
+                  print(cityName);
+                  Get.back(result: {'cityName': cityName}); //Map
+                },
                 child: Text(
                   'Get Weather',
                   style: kButtonTextStyle,
@@ -49,3 +60,11 @@ class _CityScreenState extends State<CityScreen> {
     );
   }
 }
+/*void isValidCityName(String cityName) {
+  if (cityName.isEmpty) {
+    Get.snackbar('Error', 'Please enter a city name');
+  } else {
+    print(cityName);
+    Get.back(result: {'cityName': cityName}); //Map
+  }
+}*/ 
